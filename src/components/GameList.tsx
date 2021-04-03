@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Text,
+  StyleSheet
 } from "react-native";
 
 type Props = {
@@ -26,6 +27,7 @@ type OwnProps = {
   onGameSelect: (id: number) => void;
   games: Props[];
 };
+
 const GameGrid: FC<{
   game: { item: Props };
   onGameSelect: (id: number) => void;
@@ -41,16 +43,20 @@ const GameGrid: FC<{
         style={{
           width: tileWidth,
           height: tileHeight,
-          backgroundColor: "powderblue",
+          backgroundColor: "#D6BBFF",
         }}
       >
         {item.images?.coverBig ? (
           <Image
-            style={{ width: "100%", height: "100%" }}
+            style={styles.gridImage}
             source={{ uri: item.images.coverBig }}
           />
         ) : (
-          <Text>{item.name}</Text>
+          <Text
+            style={styles.gridText}
+          >
+            {item.name}
+          </Text>
         )}
       </View>
     </TouchableOpacity>
@@ -73,4 +79,12 @@ const GameList: FC<OwnProps> = ({ games, onGameSelect }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  gridImage: { width: "100%", height: "100%" },
+  gridText: {
+    textAlign: "center",
+    color: "#FFFFFF",
+    marginTop: 10,
+  },
+});
 export default GameList;

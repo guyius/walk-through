@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, View } from "react-native";
 import GameList from "./GameList";
+import Search from "./Search";
+import Loading from "./Loading";
 
 export default function HomeScreen({ navigation }) {
   const [query, setQuery] = useState("");
-  const [tempQuery, setTempQuery] = useState("");
   const [games, setGames] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -29,14 +30,8 @@ export default function HomeScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <TextInput
-        onBlur={(e) => setQuery(e.nativeEvent.text)}
-        onEndEditing={(e) => setQuery(e.nativeEvent.text)}
-        onChangeText={setTempQuery}
-        value={tempQuery}
-        placeholder="Search for games"
-      />
-      {isLoading && <Text>Loading...</Text>}
+      <Search onSearch={(query) => setQuery(query)} />
+      {isLoading && <Loading />}
       {games.length > 0 && !isLoading && (
         <GameList games={games} onGameSelect={onGameSelect} />
       )}
@@ -47,8 +42,16 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#D6BBFF",
+    alignItems: "center"
   },
 });
+
+/*
+PURPLE - A077FF 
+PURPLE LIGHT - D6BBFF 
+PINK LIGHT FFCAF8 
+PINK - FE86C1 
+BLUE - 40CBEA 
+BLUE LIGHT - 9CE8EE 
+*/
